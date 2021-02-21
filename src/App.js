@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { getPokemons } from './services/pokemon';
+import GameBoard from './components/GameBoard';
 
-function App() {
+const App = () => {
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(() => {
+    getPokemonList()
+  }, []);
+
+  const getPokemonList = async () => {
+    const pokes = await getPokemons()
+    setPokemons(pokes)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Pókemon App!</h1>
+      <GameBoard items={pokemons} />
+    </>
   );
 }
 
