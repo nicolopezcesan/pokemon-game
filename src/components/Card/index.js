@@ -2,19 +2,32 @@ import React from 'react'
 import PropTypes from "prop-types";
 
 const Card = props => {
-    const styles = {
-        'border': '1px solid',
-        'padding': '10px',
-        'margin': '10px 10px',
-        'display': 'inline-block'
+
+    const getStyles = () => {
+        return {
+            'border': '1px solid',
+            'padding': '10px',
+            'margin': '10px 10px',
+            'display': 'inline-block',
+            'cursor': 'pointer',
+            'backgroundColor': getBackgroundColor(props.item)
+        }
+    }
+
+    const getBackgroundColor = item => {
+        if (item && item.matched) return 'yellow'
+        if (item && item.selected) return 'aquamarine'
+        return 'transparent'
     }
 
     const clickItem = () => {
+        // Card
+        // debugger
         props.onClick(props.item)
     }
 
     return (
-        <div style={styles} onClick={clickItem}>
+        <div style={getStyles()} onClick={clickItem}>
             {props.item.name}
         </div>
     )

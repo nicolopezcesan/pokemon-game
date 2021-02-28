@@ -4,26 +4,27 @@ import PropTypes from "prop-types";
 
 const CardList = props => {
 
-    const foo = item => {
-        console.log(item.name)
+    const clickItem = item => {
+        // CardList
+        // debugger
+        props.actionItem(item)
     }
 
     return (
         <div>
-            {props.items.map((item, key) => (
-                <Card
-                    key={key}
-                    item={item}
-                    onClick={foo}
-                />
-            ))}
+            {
+                props.items.length > 0
+                && props.items.map((item, key) => (
+                    <Card key={key} item={item} onClick={clickItem} />
+                ))
+            }
         </div>
     )
 }
 
 CardList.propTypes = {
     items: PropTypes.array.isRequired,
-    // onClick: PropTypes.func.isRequired,
+    actionItem: PropTypes.func.isRequired,
 };
 
 
