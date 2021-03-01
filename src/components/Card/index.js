@@ -1,34 +1,27 @@
 import React from 'react'
 import PropTypes from "prop-types";
+import './styles.css';
 
 const Card = props => {
 
-    const getStyles = () => {
-        return {
-            'border': '1px solid',
-            'padding': '10px',
-            'margin': '10px 10px',
-            'display': 'inline-block',
-            'cursor': 'pointer',
-            'backgroundColor': getBackgroundColor(props.item)
-        }
-    }
-
     const getBackgroundColor = item => {
-        if (item && item.matched) return 'yellow'
-        if (item && item.selected) return 'aquamarine'
-        return 'transparent'
+        if (item && item.matched) return { 'backgroundColor': 'yellow' }
+        if (item && item.selected) return { 'backgroundColor': 'aquamarine' }
+        return { 'backgroundColor': 'transparent' }
     }
 
     const clickItem = () => {
-        // Card
-        // debugger
         props.onClick(props.item)
     }
 
     return (
-        <div style={getStyles()} onClick={clickItem}>
-            {props.item.name}
+        <div className="card" style={getBackgroundColor(props.item)} onClick={clickItem}>
+            <div className="image-container">
+                <img className="image" src={props.item.image} alt='pokemon' />
+            </div>
+            <div>
+                <span className="name">{props.item.name}</span>
+            </div>
         </div>
     )
 }

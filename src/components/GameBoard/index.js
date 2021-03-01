@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CardList from './../CardList';
-import { generateUniqueId } from './../../utils';
+import { generateUniqueId, getPokemonImage } from './../../utils';
 
 const GameBoard = props => {
 
@@ -41,6 +41,7 @@ const GameBoard = props => {
     const structureItem = item => {
         return {
             key: generateUniqueId(),
+            image: getPokemonImage(item),
             name: item.name,
             selected: false,
             matched: false
