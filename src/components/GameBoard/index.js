@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import CardList from './../CardList';
+import Timer from './../Timer';
 import { generateUniqueId, getPokemonImage } from './../../utils';
 
 const GameBoard = props => {
 
+    const [start, setStart] = useState(false)
+    const [isFinished, setIsFinished] = useState('')
     const [boardItems, setBoardItems] = useState([])
     const [isBlockBoard, setIsBlockBoard] = useState(false)
 
@@ -26,6 +29,11 @@ const GameBoard = props => {
             isMatchCards ? setMatchCards(selectedCards) : unselectCards(selectedCards)
         }
         verifyStateBoard()
+    }, [boardItems])
+
+    useEffect(() => {
+        const itemsMatched = boardItems.filter(bi => bi.matched)
+        if (itemsMatched.length === boardItems.length) endGame()
     }, [boardItems])
 
 
@@ -83,7 +91,7 @@ const GameBoard = props => {
                 return bi
             })
             setBoardItems(updateBoardItems);
-        }, 1000);
+        }, 1500);
     }
 
     const setSelectItem = async item => {
@@ -108,8 +116,25 @@ const GameBoard = props => {
         return boardItems.sort(() => Math.random() - 0.5)
     }
 
+    const startGame = () => {
+        setStart(true)
+    }
+
+    const endGame = () => {
+        setIsFinished(false)
+        // setStart(false)
+    }
+
+    const getTime = time => {
+        debugger
+        
+    }
+
     return (
-        <CardList items={boardItems} actionItem={selectItem} />
+        <div>
+            <Timer start={startGame} stop={isFinished} getTime={getTime} />
+            {start && <CardList items={boardItems} actionItem={selectItem} />}
+        </div>
     )
 }
 

@@ -15,17 +15,10 @@ const App = () => {
     setPokemons(pokes)
   }
 
-  const styles = {
-    'display': 'grid',
-    'grid-template-columns': 'repeat(5, 1fr)',
-    'grid-template-rows': 'repeat(4, 1fr)',
-    'grid-gap': ' 0.5rem'
-  }
-
   return (
     <div className="container">
       <h1>Pókemon App!</h1>
-      <GameBoard items={pokemons} style={styles} />
+      <GameBoard items={pokemons} className="gameboard" />
     </div>
   );
 }
